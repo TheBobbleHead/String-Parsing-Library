@@ -5,7 +5,7 @@
 It is important to know what this library is meant and capable of before use.
 This library helps in the prosses of parsing strings by seperating strings into a list of substrings refered to as Chunked Strings.
 
-###### Here are some situations where you might use this library
+### Here are some situations where you might use this library
 
 If you need to get a list of words used in a text file you might write something like this:
 

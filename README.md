@@ -104,6 +104,70 @@ at the end of a seperated string.
 After you have called the function you can access the split up string or (ChunkedString) by acessing `StringParser::ChunkedString`.
 And there you have it you provide a string to the parser then setup the prossesing options then divide the string up to help with parsing.
 
+## Examples
+
+### Getting a list of words
+```cpp
+#include "StringParser.hpp"
+#include <iostream>
+
+int main() {
+	std::string TextFromDoc = "Example of some important text that needs parsing";
+	StringParser StringHelper(&TextFromDoc);
+
+	StringHelper.SeperateString(' ', false);
+
+	for (int i = 0; i < StringHelper.ChunkedString->size(); i++) {
+		std::cout << StringHelper.ChunkedString->at(i) << std::endl;
+	}
+
+	return 0;
+}
+```
+
+Out:
+```
+Example
+of
+some
+important
+text
+that
+needs
+parsing
+```
+
+### Getting a list of words, but with groups
+```cpp
+#include "StringParser.hpp"
+#include <iostream>
+
+int main() {
+	std::string TextFromDoc = "Example of some \"important text\" that needs parsing";
+	StringParser StringHelper(&TextFromDoc);
+
+	StringHelper.AddGroupingChar('\"', false);
+	StringHelper.SeperateString(' ', false);
+
+	for (int i = 0; i < StringHelper.ChunkedString->size(); i++) {
+		std::cout << StringHelper.ChunkedString->at(i) << std::endl;
+	}
+
+	return 0;
+}
+```
+
+Out: 
+```
+Example
+of
+some
+important text
+that
+needs
+parsing
+```
+
 ## Installation
 
 #### There are a few ways that you can install this library for your program

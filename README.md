@@ -98,13 +98,13 @@ This then results in the output: `this` `string` `has` `to` `many` `seperators`.
 ### Parsing
 Now that you have setup the `StringParser` Instance to your need and liking you can now call a single function to parse the provided string.
 Call `StringParser::SeperateString(char Seperator, bool IncludeSeperator)`. The `Seperator` param is the char that will divide up your string for example Engilsh words
-are seperated by a space so is you want to get each word in it's own string you would put ` ` in as the Seprator. The `IncludeSeperator` param will append the seperator
+are seperated by a space so is you want to get each word in it's own string you would put a space in as the Seprator. The `IncludeSeperator` param will append the seperator
 at the end of a seperated string.
 
 After you have called the function you can access the split up string or (ChunkedString) by acessing `StringParser::ChunkedString`.
 And there you have it you provide a string to the parser then setup the prossesing options then divide the string up to help with parsing.
 
-## installation
+## Installation
 
 #### There are a few ways that you can install this library for your program
 

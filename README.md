@@ -104,9 +104,9 @@ at the end of a seperated string.
 After you have called the function you can access the split up string or (ChunkedString) by acessing `StringParser::ChunkedString`.
 And there you have it you provide a string to the parser then setup the prossesing options then divide the string up to help with parsing.
 
-##installation
+## installation
 
-####There are a few ways that you can install this library for your program
+#### There are a few ways that you can install this library for your program
 
 First you can use [CMake](https://cmake.org) and add this project as a subdirectory and link it to your project.
 

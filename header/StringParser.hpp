@@ -62,6 +62,7 @@ public:
 	void ClearIgnoreChars();
 
 	void ClearChunkedString();
-
 	void ClearAll();
+
+	~StringParser();
 };

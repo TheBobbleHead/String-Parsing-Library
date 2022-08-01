@@ -188,3 +188,9 @@ void StringParser::ClearAll() {
 	IgnoreSeperatorInGroup = false;
 	IngnoreExtraSeperators = false;
 }
+
+StringParser::~StringParser() {
+	//delete chunked string
+	delete ChunkedString;
+	return;
+}

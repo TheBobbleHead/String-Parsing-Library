@@ -8,6 +8,9 @@ set(CMAKE_CXX_STANDARD_REQUIRED true)
 add_library(StringParser STATIC "source/StringParser.cpp")
 include_directories(${CMAKE_CURRENT_SOURCE_DIR}/header)
 
+option(ENABLE_TESTS "Tests the program" OFF)
+
+if(ENABLE_TESTS)
 enable_testing()
 
 add_executable(SeperateStringTest "test/SeperateStringTest.cpp")
@@ -18,3 +21,4 @@ add_test(NAME SeperateString2 COMMAND SeperateStringTest 2)
 add_test(NAME SeperateString3 COMMAND SeperateStringTest 3)
 add_test(NAME SeperateString4 COMMAND SeperateStringTest 4)
 add_test(NAME SeperateString5 COMMAND SeperateStringTest 5)
+endif()

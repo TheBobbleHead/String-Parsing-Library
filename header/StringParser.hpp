@@ -43,6 +43,8 @@ private:
 
 public:
 
+	std::string operator [] (const int &Index);
+
 	StringParser(std::string* UseString);
 
 	std::string* String;

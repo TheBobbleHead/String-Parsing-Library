@@ -194,3 +194,9 @@ StringParser::~StringParser() {
 	delete ChunkedString;
 	return;
 }
+
+std::string StringParser::operator[] (const int &Index) {
+	std::string ReturnString;
+	ReturnString = this->ChunkedString->at(Index);
+	return ReturnString;
+}

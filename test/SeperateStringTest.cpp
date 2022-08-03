@@ -34,7 +34,7 @@ int main(int argc, char** argv) {
 			}
 
 			for (int i = 0; i < StringHelper.ChunkedString->size(); i++) {
-				if (StringHelper.ChunkedString->at(i) != SegmentedString[i]) {
+				if (StringHelper[i] != SegmentedString[i]) {
 					std::cout << "Error: Seperation error -> found unmatching string" << std::endl;
 					return 1;
 				}
@@ -65,7 +65,7 @@ int main(int argc, char** argv) {
 			}
 
 			for (int i = 0; i < StringHelper.ChunkedString->size(); i++) {
-				if (StringHelper.ChunkedString->at(i) != SegmentedString[i]) {
+				if (StringHelper[i] != SegmentedString[i]) {
 					std::cout << "Error: Seperation error -> found unmatching string" << std::endl;
 					return 1;
 				}
@@ -104,7 +104,7 @@ int main(int argc, char** argv) {
 			}
 
 			for (int i = 0; i < StringHelper.ChunkedString->size(); i++) {
-				if (StringHelper.ChunkedString->at(i) != SegmentedString[i]) {
+				if (StringHelper[i] != SegmentedString[i]) {
 					std::cout << "Error: Seperation error -> found unmatching string" << std::endl;
 					return 1;
 				}
@@ -134,7 +134,7 @@ int main(int argc, char** argv) {
 			}
 
 			for (int i = 0; i < StringHelper.ChunkedString->size(); i++) {
-				if (StringHelper.ChunkedString->at(i) != SegmentedString[i]) {
+				if (StringHelper[i] != SegmentedString[i]) {
 					std::cout << "Error: Seperation error -> found unmatching string" << std::endl;
 					return 1;
 				}
@@ -162,7 +162,7 @@ int main(int argc, char** argv) {
 			}
 
 			for (int i = 0; i < StringHelper.ChunkedString->size(); i++) {
-				if (StringHelper.ChunkedString->at(i) != SegmentedString[i]) {
+				if (StringHelper[i] != SegmentedString[i]) {
 					std::cout << "Error: Seperation error -> found unmatching string" << std::endl;
 					return 1;
 				}

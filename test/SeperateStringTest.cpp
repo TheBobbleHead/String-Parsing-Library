@@ -170,6 +170,89 @@ int main(int argc, char** argv) {
 
 			return 0;
 		}
+		// Tests for grouping char pairs
+		else if (TestNumber == '6') {
+			std::string TestString = "groups with {open and closing} chars";
+			StringParser StringHelper(&TestString);
+
+			StringHelper.AddGroupingCharPair('{', '}', false, false);
+
+			StringHelper.SeperateString(' ', false);
+
+			std::string SegmentedString[4];
+			SegmentedString[0] = "groups";
+			SegmentedString[1] = "with";
+			SegmentedString[2] = "open and closing";
+			SegmentedString[3] = "chars";
+
+			if (StringHelper.ChunkedString->size() != 4) {
+				std::cout << "Error: Seperation error -> amount of strings dose not match" << std::endl;
+				return 2;
+			}
+
+			for (int i = 0; i < StringHelper.ChunkedString->size(); i++) {
+				if (StringHelper[i] != SegmentedString[i]) {
+					std::cout << "Error: Seperation error -> found unmatching string" << std::endl;
+					return 1;
+				}
+			}
+
+			return 0;
+		}
+		else if (TestNumber == '7') {
+			std::string TestString = "{inter connected \"groups} parsing\"";
+			StringParser StringHelper(&TestString);
+
+			StringHelper.AddGroupingChar('\"', false);
+			StringHelper.AddGroupingCharPair('{', '}', false, false);
+
+			StringHelper.SeperateString(' ', false);
+
+			std::string SegmentedString;
+			SegmentedString = "inter connected \"groups parsing";
+
+			if (StringHelper.ChunkedString->size() != 1) {
+				std::cout << "Error: Seperation error -> amount of strings dose not match" << std::endl;
+				return 2;
+			}
+
+			for (int i = 0; i < StringHelper.ChunkedString->size(); i++) {
+				if (StringHelper[i] != SegmentedString) {
+					std::cout << "Error: Seperation error -> found unmatching string" << std::endl;
+					return 1;
+				}
+			}
+			
+			return 0;
+		}
+		else if (TestNumber == '8') {
+			std::string TestString = "An example {string \"with nested\" groups}";
+			StringParser StringHelper(&TestString);
+
+			StringHelper.AddGroupingChar('\"', false);
+			StringHelper.AddGroupingCharPair('{', '}', false , false);
+
+			StringHelper.SeperateString(' ', false);
+
+			std::string SegmentedString[3];
+			SegmentedString[0] = "An";
+			SegmentedString[1] = "example";
+			SegmentedString[2] = "string \"with nested\" groups";
+
+			if (StringHelper.ChunkedString->size() != 3) {
+				std::cout << "Error: Seperation error -> amount of strings dose not match" << std::endl;
+				return 2;
+			}
+
+			for (int i = 0; i < StringHelper.ChunkedString->size(); i++) {
+				if (StringHelper[i] != SegmentedString[i]) {
+					std::cout << "Error: Seperation error -> found unmatching string" << std::endl;
+					return 1;
+				}
+			}
+
+			return 0;
+		}
 		else {
 			std::cout << "Error invalid argumnet: " << std::endl;
 			return 100;

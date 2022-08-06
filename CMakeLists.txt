@@ -21,4 +21,8 @@ if(ENABLE_TESTS)
 	add_test(NAME SeperateString3 COMMAND SeperateStringTest 3)
 	add_test(NAME SeperateString4 COMMAND SeperateStringTest 4)
 	add_test(NAME SeperateString5 COMMAND SeperateStringTest 5)
+
+	add_test(NAME NewFeatureTest1 COMMAND SeperateStringTest 6)
+	add_test(NAME NewFeatureTest2 COMMAND SeperateStringTest 7)
+	add_test(NAME NewFeatureTest3 COMMAND SeperateStringTest 8)
 endif()

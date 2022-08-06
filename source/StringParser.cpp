@@ -1,5 +1,17 @@
 #include "StringParser.hpp"
 
+bool StringParser::GroupingCharPiar::operator == (StringParser::GroupingCharPiar GroupingPair) {
+	if (this->OpeningChar != GroupingPair.OpeningChar) {
+		return false;
+	}
+
+	if (this->ClosingChar != GroupingPair.ClosingChar) {
+		return false;
+	}
+
+	return true;
+}
+
 StringParser::StringParser(std::string* UseString) {
 	String = UseString;
 	ChunkedString = new std::vector<std::string>;
@@ -9,6 +21,11 @@ StringParser::StringParser(std::string* UseString) {
 void StringParser::SeperateString(char Seperator, bool IncludeSeperator) {
 	std::string CurrentChunk;
 	std::vector<bool> InsudeGroup;
+	std::vector<bool> InsideGroupPair;
+
+	for (int i = 0; i < GroupingCharPiars.size(); i++) {
+		InsideGroupPair.push_back(false);
+	}
 
 	for (int i = 0; i < GroupingChars.size(); i++) {
 		InsudeGroup.push_back(false);
@@ -30,6 +47,15 @@ void StringParser::SeperateString(char Seperator, bool IncludeSeperator) {
 			}
 		}
 
+		for (int a = 0; a < InsideGroupPair.size(); a++) {
+			if (String->at(i) == GroupingCharPiars.at(a).OpeningChar) {
+				InsideGroupPair.at(a) = true;
+			}
+			else if (String->at(i) == GroupingCharPiars.at(a).ClosingChar) {
+				InsideGroupPair.at(a) = false;
+			}
+		}
+
 		if (String->at(i) != Seperator) {
 			bool IsGroupIgnore = false;
 			bool IsInAGroup = false;
@@ -42,6 +68,29 @@ void StringParser::SeperateString(char Seperator, bool IncludeSeperator) {
 							IsInAGroup = true;
 						}
 					}
+
+					for (int b = 0; b < InsideGroupPair.size(); b++) {
+						if (InsideGroupPair.at(b) == true) {
+							IsInAGroup = true;
+						}
+					}
+				}
+			}
+
+			for (int a = 0; a < GroupingCharPiars.size(); a++) {
+				if (String->at(i) == GroupingCharPiars.at(a).OpeningChar) {
+
+					if ((InsideGroupPair.size() > 1) && (a > 0)) {
+						if (InsideGroupPair.at(a - 1) == true) {
+							IsInAGroup = true;
+						}
+					}
+
+					for (int b = 0; b < InsudeGroup.size(); b++) {
+						if (InsudeGroup.at(b) == true) {
+							IsInAGroup = true;
+						}
+					}
 				}
 			}
 
@@ -51,6 +100,18 @@ void StringParser::SeperateString(char Seperator, bool IncludeSeperator) {
 					if ((String->at(i) == GroupingChars.at(a).Char) && (GroupingChars.at(a).IncludeChar == false)) {
 						IsGroupIgnore = true;
 						break;
+					}
+				}
+
+				for (int a = 0; a < GroupingCharPiars.size(); a++) {
+					if ((String->at(i) == GroupingCharPiars.at(a).OpeningChar) && (GroupingCharPiars.at(a).IncludeOpening == false)) {
+						IsGroupIgnore = true;
+					}
+				}
+
+				for (int a = 0; a < GroupingCharPiars.size(); a++) {
+					if ((String->at(i) == GroupingCharPiars.at(a).ClosingChar) && (GroupingCharPiars.at(a).IncludeClosing == false)) {
+						IsGroupIgnore = true;
 					}
 				}
 			}
@@ -88,6 +149,18 @@ void StringParser::SeperateString(char Seperator, bool IncludeSeperator) {
 					}
 					InsideAgroup = true;
 					break;
+				}
+			}
+			
+			if (!InsideAgroup) {
+				for (int a = 0; a < InsideGroupPair.size(); a++) {
+					if (InsideGroupPair.at(a)) {
+						if (IgnoreSeperatorInGroup == false) {
+							CurrentChunk.push_back(String->at(i));
+						}
+						InsideAgroup = true;
+						break;
+					}
 				}
 			}
 
@@ -134,6 +207,25 @@ void StringParser::AddGroupingChar(char GroupingChar_, bool IncludeThisChar) {
 	return;
 }
 
+void StringParser::AddGroupingCharPair(char OpenChar, char ClosingChar, bool IncludeOpen, bool IncludeClose) {
+	GroupingCharPiar AddPair;
+	AddPair.OpeningChar = OpenChar;
+	AddPair.ClosingChar = ClosingChar;
+	AddPair.IncludeOpening = IncludeOpen;
+	AddPair.IncludeClosing = IncludeClose;
+
+	for (int i = 0; i < GroupingCharPiars.size(); i++) {
+		if (GroupingCharPiars.at(i) == AddPair) {
+			GroupingCharPiars.at(i).IncludeClosing = IncludeClose;
+			GroupingCharPiars.at(i).IncludeOpening = IncludeOpen;
+			return;
+		}
+	}
+
+	GroupingCharPiars.push_back(AddPair);
+	return;
+}
+
 void StringParser::RemoveGroupingChar(char GroupingChar) {
 	for (int i = 0; i < GroupingChars.size(); i++) {
 		if (GroupingChars.at(i).Char == GroupingChar) {
@@ -142,6 +234,20 @@ void StringParser::RemoveGroupingChar(char GroupingChar) {
 		}
 	}
 
+	return;
+}
+
+void StringParser::RemoveGroupingCharPair(char OpenChar, char ClosingChar) {
+	GroupingCharPiar Input;
+	Input.OpeningChar = OpenChar;
+	Input.ClosingChar = ClosingChar;
+
+	for (int i = 0; i < GroupingCharPiars.size(); i++) {
+		if (GroupingCharPiars.at(i) == Input) {
+			GroupingCharPiars.erase(GroupingCharPiars.begin() + i);
+			return;
+		}
+	}
 	return;
 }
 
@@ -193,4 +299,10 @@ StringParser::~StringParser() {
 	//delete chunked string
 	delete ChunkedString;
 	return;
+}
+
+std::string StringParser::operator[] (const int &Index) {
+	std::string ReturnString;
+	ReturnString = this->ChunkedString->at(Index);
+	return ReturnString;
 }

@@ -46,6 +46,7 @@ private:
 	std::vector<GroupingChar> GroupingChars;
 	std::vector<GroupingCharPiar> GroupingCharPiars;
 	std::vector<char> IgnoreChars;
+	std::vector<char> Seperators;
 
 public:
 

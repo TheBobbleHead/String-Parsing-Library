@@ -87,7 +87,14 @@ void StringParser::SeperateString(char Seperator, bool IncludeSeperator) {
 			}
 		}
 
-		if (String->at(i) != Seperator) {
+		bool CurrentCharSeperator = false;
+		for (int a = 0; a < Seperators.size(); a++) {
+			if (String->at(i) == Seperators.at(a).Char) {
+				CurrentCharSeperator = true;
+			}
+		}
+
+		if ((String->at(i) != Seperator) && (!CurrentCharSeperator)) {
 			bool IsGroupIgnore = false;
 			bool IsInAGroup = false;
 

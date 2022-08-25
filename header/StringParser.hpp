@@ -41,12 +41,19 @@ class StringParser {
 		bool operator == (GroupingCharPiar GroupingPair);
 	};
 
+	struct Seperator {
+		char Char =  NULL;
+		bool Include false;
+
+		bool operator == (Char CompareChar);
+	};
+
 private:
 
 	std::vector<GroupingChar> GroupingChars;
 	std::vector<GroupingCharPiar> GroupingCharPiars;
 	std::vector<char> IgnoreChars;
-	std::vector<char> Seperators;
+	std::vector<Seperator> Seperators;
 
 public:
 
@@ -63,14 +70,19 @@ public:
 	//bool SplitNestedGroups = false;
 
 	void SeperateString(char Seperator, bool IncludeSeperator);
+
 	void AddGroupingChar(char GroupingChar_, bool IncludeThisChar);
 	void AddGroupingCharPair(char OpenChar, char ClosingChar, bool IncludeOpen, bool IncludeClose);
 	void RemoveGroupingChar(char GroupingChar);
 	void RemoveGroupingCharPair(char OpenChar, char ClosingChar);
 	void ClearGroupingChars();
+
 	void AddIgnoreChar(char Ignore);
 	void RemoveIgnoreChar(char IgnoreRM);
 	void ClearIgnoreChars();
+
+	void AddSeperator(char Char, bool IncludeChar);
+	void RemoveSeperator(char Char);
 
 	void ClearChunkedString();
 	void ClearAll();

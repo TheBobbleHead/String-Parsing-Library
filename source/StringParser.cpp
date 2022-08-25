@@ -1,5 +1,36 @@
 #include "StringParser.hpp"
 
+bool StringParser::Seperator::bool operator == (Char CompareChar) {
+	return (this->Char == CompareChar) ? true : false;
+}
+
+void StringParser::AddSeperator(char Char, bool IncludeChar) {
+	for (int i = 0; i < Seperators.size(); i++) {
+		if (Seperators.at(i).Char == Char) {
+			return;
+		}
+	}
+
+	Seperator Sep;
+	Sep.Char = Char;
+	Sep.Include = IncludeChar;
+
+	Seperators.push_back(Sep);
+
+	return;
+}
+
+void StringParser::RemoveSeperator(char Char) {
+	for (int i = 0; i < Seperators.size(); i++) {
+		if (Seperators.at(i).Char == Char) {
+			Seperators.erase(Seperators.beg() + i);
+			return;
+		}
+	}
+
+	return;
+}
+
 bool StringParser::GroupingCharPiar::operator == (StringParser::GroupingCharPiar GroupingPair) {
 	if (this->OpeningChar != GroupingPair.OpeningChar) {
 		return false;

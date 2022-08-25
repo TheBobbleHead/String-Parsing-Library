@@ -43,7 +43,7 @@ class StringParser {
 
 	struct Seperator {
 		char Char =  NULL;
-		bool Include false;
+		bool Include = false;
 
 		bool operator == (Char CompareChar);
 	};

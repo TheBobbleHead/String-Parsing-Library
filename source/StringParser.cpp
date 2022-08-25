@@ -1,6 +1,6 @@
 #include "StringParser.hpp"
 
-bool StringParser::Seperator::bool operator == (Char CompareChar) {
+bool StringParser::Seperator::operator == (Char CompareChar) {
 	return (this->Char == CompareChar) ? true : false;
 }
 
@@ -23,7 +23,7 @@ void StringParser::AddSeperator(char Char, bool IncludeChar) {
 void StringParser::RemoveSeperator(char Char) {
 	for (int i = 0; i < Seperators.size(); i++) {
 		if (Seperators.at(i).Char == Char) {
-			Seperators.erase(Seperators.beg() + i);
+			Seperators.erase(Seperators.begin() + i);
 			return;
 		}
 	}

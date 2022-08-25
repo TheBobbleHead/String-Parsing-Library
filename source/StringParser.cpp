@@ -1,6 +1,6 @@
 #include "StringParser.hpp"
 
-bool StringParser::Seperator::operator == (Char CompareChar) {
+bool StringParser::Seperator::operator == (char CompareChar) {
 	return (this->Char == CompareChar) ? true : false;
 }
 

@@ -45,7 +45,7 @@ class StringParser {
 		char Char =  NULL;
 		bool Include = false;
 
-		bool operator == (Char CompareChar);
+		bool operator == (char CompareChar);
 	};
 
 private:

@@ -67,8 +67,7 @@ public:
 	bool IgnoreCharsEnabled = false;
 	bool IgnoreSeperatorInGroup = false;
 	bool IngnoreExtraSeperators = false;
-	//bool SplitNestedGroups = false;
-
+	
 	void SeperateString(char Seperator, bool IncludeSeperator);
 
 	void AddGroupingChar(char GroupingChar_, bool IncludeThisChar);

@@ -69,6 +69,7 @@ public:
 	bool IngnoreExtraSeperators = false;
 	
 	void SeperateString(char Seperator, bool IncludeSeperator);
+	void SeperateString();
 
 	void AddGroupingChar(char GroupingChar_, bool IncludeThisChar);
 	void AddGroupingCharPair(char OpenChar, char ClosingChar, bool IncludeOpen, bool IncludeClose);

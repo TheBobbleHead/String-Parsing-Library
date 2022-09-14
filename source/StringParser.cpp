@@ -49,6 +49,12 @@ StringParser::StringParser(std::string* UseString) {
 	return;
 }
 
+void StringParser::SeperateString() {
+	if (Seperators.size() > 0) {
+		SeperateString(Seperators.at(0).Char, Seperators.at(0).Include);
+	}
+}
+
 void StringParser::SeperateString(char Seperator, bool IncludeSeperator) {
 	std::string CurrentChunk;
 	std::vector<bool> InsudeGroup;
